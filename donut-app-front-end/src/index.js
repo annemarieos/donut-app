@@ -92,14 +92,13 @@ const renderOneDonut = donut => {
 
   btn1.addEventListener("click", (e) => {
 
-    const input = document.querySelector(`add-${donut.id}`)
-    const price = document.querySelector(`price-${donut.id}`)
+    const input = document.querySelector(`#add-${e.target.id}`)
+    const price = document.querySelector(`#price-${e.target.id}`)
     const cost = parseFloat(price.innerText.slice(9))
     const quantity = parseInt(input.value)
 
     const totalCostPerItem = cost * quantity
     console.log(totalCostPerItem)
-    debugger
   })
 
   card.append(h3, img, ul, p, less, more, input, btn1)
