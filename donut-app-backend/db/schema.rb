@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2019_08_19_211126) do
     t.string "address"
     t.string "email"
     t.string "image"
-    t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,6 +32,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_211126) do
   create_table "orders", force: :cascade do |t|
     t.integer "items"
     t.integer "customer_id"
+    t.integer "donut_id"
     t.float "total_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

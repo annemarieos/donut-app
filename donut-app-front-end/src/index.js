@@ -3,6 +3,12 @@ const DONUT_URL = "http://localhost:3000/donuts"
 const form = document.querySelector("form")
 const button = document.querySelector("#donut-button")
 
+
+// Get total price per donut flavour rendered in top right corner 
+// For each unit, multiply unit by specified price. 
+
+
+
 button.addEventListener("submit", e => {
   e.preventDefault();
   newForm();
@@ -30,20 +36,18 @@ const newForm = () => {
 
 }
 
-let newMonsters = () => {
-  const name = document.querySelector("#name");
-  const age = document.querySelector("#age");
-  const description = document.querySelector("#description");
-  fetch(monsterUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name: name.value,
-      age: age.value,
-      description: description.value
-    })
-  });
-};
+// const addDonutToBasket = donut => {
+//   fetch(DONUT_URL {
+//     method: "POST", 
+//     headers:{ "Content-Type": "application/json" }, 
+//     body: JSON.stringify({
+
+//     })
+//   })
+// }
+
+
+
 
 function fetchDonuts() {
   fetch(DONUT_URL)
@@ -70,6 +74,8 @@ const renderOneDonut = donut => {
   const p = document.createElement('p')
   const input = document.createElement('input')
 
+
+  // btn1.className = "add-to-order"
   h3.innerText = donut.flavour
   p.innerText = `Price: £${donut.price}`
   input.value = 0
@@ -77,15 +83,30 @@ const renderOneDonut = donut => {
   img.width = 300
   img.height = 300
   btn1.innerText = "Add to Order"
-  btn1.type = "submit"
+  btn1.id = donut.id
   more.innerText = "+"
   less.innerText = "-"
+  input.id = `add-${donut.id}`
+  p.id = `price-${donut.id}`
 
+
+  btn1.addEventListener("click", (e) => {
+
+    const input = document.querySelector(`add-${donut.id}`)
+    const price = document.querySelector(`price-${donut.id}`)
+    const cost = parseFloat(price.innerText.slice(9))
+    const quantity = parseInt(input.value)
+
+    const totalCostPerItem = cost * quantity
+    console.log(totalCostPerItem)
+    debugger
+  })
 
   card.append(h3, img, ul, p, less, more, input, btn1)
   donutCollection.append(card)
-  
+
   more.addEventListener("click", () => {
+    // debugger
     input.value = parseInt(input.value) + 1
   })
 
@@ -93,14 +114,12 @@ const renderOneDonut = donut => {
     input.value = parseInt(input.value) - 1
   })
 
-  // btn1.addEventListener("click", e => {
-  //   debugger
-  //   e.preventDefault()
-  // })
-
 
 }
 
+const calculateItemTotal = () => {
+
+}
 
 
 
